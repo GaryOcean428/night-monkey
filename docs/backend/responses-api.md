@@ -5,16 +5,19 @@ The Responses API is OpenAI's recommended successor to the Chat Completions API,
 ## Key Advantages
 
 ### State Management
+
 - Server-side conversation tracking
 - Lower token overhead (no need to send entire history)
 - Simple response chaining via `previous_response_id`
 
 ### Input/Output Flexibility
+
 - Accept both string and message array inputs
 - Structured output formatting
 - Simpler extraction of responses
 
 ### Built-in Tool Support
+
 - Native web search capabilities
 - Code interpreter integration
 - File analysis tools

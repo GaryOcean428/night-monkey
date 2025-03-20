@@ -52,13 +52,13 @@ To deploy using the Vercel web interface:
 
 The following environment variables should be set in your Vercel project:
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
-| `ANTHROPIC_API_KEY` | Anthropic API key (for Claude models) | No |
-| `GOOGLE_API_KEY` | Google API key (for Gemini models) | No |
-| `GROQ_API_KEY` | Groq API key (for Llama models) | No |
-| `PERPLEXITY_API_KEY` | Perplexity API key | No |
+| Variable | Description | Required | Supported Models |
+|----------|-------------|----------|-----------------|
+| `OPENAI_API_KEY` | Your OpenAI API key | Yes | o1, o1-pro, o1-mini, gpt-4o, gpt-4o-mini, gpt-o3, gpt-o3-mini, gpt-4.5-preview, gpt-4.5-turbo |
+| `ANTHROPIC_API_KEY` | Anthropic API key | No | claude-3-7-sonnet-20250219, claude-3-5-opus-20240620, claude-3-5-haiku-20240307 |
+| `GOOGLE_API_KEY` | Google API key | No | gemini-2.0-flash-thinking-exp, gemini-2.0-pro-experimental, gemini-2.0-flash-lite |
+| `GROQ_API_KEY` | Groq API key | No | llama-3.3-70b-versatile |
+| `PERPLEXITY_API_KEY` | Perplexity API key | No | llama-3.1-sonar-huge-128k-online |
 
 ## Security Enhancements
 
@@ -122,6 +122,31 @@ Once deployed, you can monitor your application using:
 2. **Function Execution Metrics**: Track serverless function performance
 3. **Error Tracking**: Identify and debug runtime errors
 
+## Pre-Deployment Testing Checklist
+
+Before deploying to Vercel, complete these tests locally:
+
+### Responses API Functionality
+- [ ] Create a new conversation thread
+- [ ] Send messages and receive streaming responses
+- [ ] Verify tool calling works (e.g., weather functionality)
+- [ ] Check message history retrieval
+
+### Stream Interruption
+- [ ] Test interrupting a response mid-generation
+- [ ] Verify UI updates correctly after interruption
+- [ ] Test multiple rapid interruptions
+
+### Error Handling
+- [ ] Test with invalid API key (should show proper error)
+- [ ] Test with network interruption
+- [ ] Verify error state UI components display correctly
+
+### Component Testing
+- [ ] Test responsive behavior on different screen sizes
+- [ ] Verify chat UI scrolls properly with long conversations
+- [ ] Check that tool call results display correctly
+
 ## Troubleshooting
 
 If you encounter issues with your deployment:
@@ -131,6 +156,7 @@ If you encounter issues with your deployment:
 3. Ensure API keys have the correct permissions
 4. Check the browser console for client-side errors
 5. Review function logs in the Vercel dashboard
+6. Compare your pre-deployment tests with production behavior
 
 ## Updates and Maintenance
 

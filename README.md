@@ -1,9 +1,27 @@
-# Night Monkey
+# Night Monkey (2025)
 
-A Next.js application built on the OpenAI [Assistants API](https://platform.openai.com/docs/assistants/overview).
+A modern Next.js application utilizing the latest OpenAI [Responses API](https://platform.openai.com/docs/guides/responses-api) and [Assistants API](https://platform.openai.com/docs/assistants/overview).
 <br/>
 <br/>
 ![Night Monkey](https://github.com/openai/openai-assistants-quickstart/assets/27232/755e85e9-3ea4-421f-b202-3b0c435ea270)
+
+## Features
+
+- Multi-model support (OpenAI, Claude, Gemini, Llama)
+- Streaming responses with interruption capability
+- Function calling with weather demo widget
+- File search and document analysis
+- Full responsive design
+
+## Supported Models
+
+| Provider | Models |
+|----------|--------|
+| OpenAI | o1, o1-pro, o1-mini, gpt-4o, gpt-4o-mini, gpt-o3, gpt-o3-mini, gpt-4.5-preview, gpt-4.5-turbo |
+| Anthropic | claude-3-7-sonnet-20250219, claude-3-5-opus-20240620, claude-3-5-haiku-20240307 |
+| Google | gemini-2.0-flash-thinking-exp, gemini-2.0-pro-experimental, gemini-2.0-flash-lite |
+| Meta/Groq | llama-3.3-70b-versatile |
+| Perplexity | llama-3.1-sonar-huge-128k-online |
 
 ## Setup
 
@@ -14,13 +32,22 @@ git clone https://github.com/YourUsername/night-monkey.git
 cd night-monkey
 ```
 
-### 2. Set your [OpenAI API key](https://platform.openai.com/api-keys)
+### 2. Set your API keys
 
 ```shell
-export OPENAI_API_KEY="sk_..."
-```
+# Create .env file from template
+cp .env.example .env
 
-(or in `.env.example` and rename it to `.env`).
+# Edit .env file with your API keys
+# Required
+export OPENAI_API_KEY="sk_..."
+
+# Optional (for multi-model support)
+export ANTHROPIC_API_KEY="sk_ant_..."
+export GOOGLE_API_KEY="AIza..."
+export GROQ_API_KEY="gsk_..."
+export PERPLEXITY_API_KEY="pplx-..."
+```
 
 ### 3. Install dependencies
 
@@ -28,7 +55,7 @@ export OPENAI_API_KEY="sk_..."
 npm install
 ```
 
-### 4. Run
+### 4. Run development server
 
 ```shell
 npm run dev
@@ -38,15 +65,15 @@ npm run dev
 
 ## Deployment
 
-You can deploy this project to Vercel or any other platform that supports Next.js.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FYourUsername%2Fnight-monkey&env=OPENAI_API_KEY,OPENAI_ASSISTANT_ID&envDescription=API%20Keys%20and%20Instructions)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FYourUsername%2Fnight-monkey&env=OPENAI_API_KEY&envDescription=API%20Keys%20Required%20for%20Authentication)
 
 ## Overview
 
-This project uses the OpenAI Assistants API in Next.js with [streaming](https://platform.openai.com/docs/assistants/overview/step-4-create-a-run), tool use ([code interpreter](https://platform.openai.com/docs/assistants/tools/code-interpreter) and [file search](https://platform.openai.com/docs/assistants/tools/file-search)), and [function calling](https://platform.openai.com/docs/assistants/tools/function-calling). While there are multiple pages to demonstrate each of these capabilities, they all use the same underlying assistant with all capabilities enabled.
+This project uses the latest OpenAI Responses API and Assistants API in Next.js with [streaming](https://platform.openai.com/docs/assistants/overview/step-4-create-a-run), tool use ([code interpreter](https://platform.openai.com/docs/assistants/tools/code-interpreter) and [file search](https://platform.openai.com/docs/assistants/tools/file-search)), and [function calling](https://platform.openai.com/docs/assistants/tools/function-calling). While there are multiple pages to demonstrate each of these capabilities, they all use the same underlying assistant with all capabilities enabled.
 
-The main logic for chat will be found in the `Chat` component in `app/components/chat.tsx`, and the handlers starting with `api/assistants/threads` (found in `api/assistants/threads/...`).
+The main logic for chat will be found in the `Chat` component in `app/components/chat.tsx`, and the handlers starting with `api/assistants/threads` (found in `api/assistants/threads/...`) and `api/responses` for the Responses API implementation.
 
 ### Pages
 

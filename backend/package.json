@@ -1,0 +1,17 @@
+{
+  "name": "night-monkey-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "yarn tsc -w",
+    "build": "yarn tsc",
+    "typecheck": "yarn tsc --noEmit"
+  },
+  "dependencies": {
+    "openai": "^4.46.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.7",
+    "typescript": "5.4.5"
+  }
+}

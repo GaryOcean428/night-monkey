@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "paths": {
+      "@/backend/*": ["./*"],
+      "@/frontend/*": ["../frontend/*"],
+      "@/*": ["../*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
