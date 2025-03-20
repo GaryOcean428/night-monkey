@@ -5,10 +5,13 @@ const nextConfig = {
   webpack: (config, { isServer }) => {
     // Ignore the docs folder in production builds
     if (process.env.NODE_ENV === "production") {
-      config.watchOptions = config.watchOptions || {};
-      config.watchOptions.ignored = Array.isArray(config.watchOptions.ignored)
-        ? [...config.watchOptions.ignored, "**/docs/**"]
-        : ["**/node_modules/**", "**/docs/**"];
+      // Create a new watchOptions object instead of modifying the existing one
+      config.watchOptions = {
+        ...config.watchOptions,
+        ignored: Array.isArray(config.watchOptions?.ignored)
+          ? [...config.watchOptions.ignored, "**/docs/**"]
+          : ["**/node_modules/**", "**/docs/**"]
+      };
     }
     return config;
   },
