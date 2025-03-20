@@ -16,6 +16,10 @@
 # production
 /build
 
+# docs (exclude from deployment)
+# Note: We still track these in git, but they won't be deployed
+# /docs
+
 # misc
 .DS_Store
 *.pem
