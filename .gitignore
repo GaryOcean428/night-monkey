@@ -37,6 +37,9 @@ yarn-error.log*
 /backend/.env.local
 /frontend/.env.local
 
+# Large files
+.yarn/unplugged/@next-swc-linux-x64-gnu-npm-14.1.4-19585e8eca/node_modules/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node
+
 # vercel
 .vercel
 
