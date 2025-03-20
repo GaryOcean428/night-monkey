@@ -1,0 +1,26 @@
+# DO NOT COMMIT THIS FILE WITH REAL KEYS
+# Rename this file to ".env.local" and add your API keys
+
+# OpenAI API key
+# Create an OpenAI API key at https://platform.openai.com/account/api-keys
+OPENAI_API_KEY="sk-123..."
+
+# Anthropic API key
+# Create an Anthropic API key at https://console.anthropic.com/
+ANTHROPIC_API_KEY="sk-ant-123..."
+
+# Google Gemini API key
+# Create a Google AI API key at https://aistudio.google.com/
+GOOGLE_API_KEY="abc123..."
+
+# Groq API key (for Llama models)
+# Create a Groq API key at https://console.groq.com/
+GROQ_API_KEY="gsk_123..."
+
+# Perplexity API key (for Sonar models)
+# Create a Perplexity API key at https://www.perplexity.ai/settings/api
+PERPLEXITY_API_KEY="pplx-123..."
+
+# (optional) Create an OpenAI Assistant at https://platform.openai.com/assistants.
+# IMPORTANT! Be sure to enable file search and code interpreter tools.
+OPENAI_ASSISTANT_ID="123..."
