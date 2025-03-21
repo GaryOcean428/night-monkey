@@ -32,9 +32,14 @@ const initBackend = () => {
 
 // Function to check for the existence of Serverless Functions
 const checkServerlessFunctions = () => {
-  const functionsPath = path.join(__dirname, 'api');
-  const functionFiles = fs.readdirSync(functionsPath).filter(file => file.endsWith('.ts'));
-  return functionFiles.length > 0;
+  try {
+    const functionsPath = path.join(__dirname, 'api');
+    const functionFiles = fs.readdirSync(functionsPath).filter(file => file.endsWith('.ts'));
+    return functionFiles.length > 0;
+  } catch (error) {
+    console.error('Error checking serverless functions:', error);
+    return false;
+  }
 };
 
 // Export commonly used utilities and configurations
