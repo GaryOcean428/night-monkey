@@ -4,8 +4,8 @@
       "main": true
     }
   },
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/.next",
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": ".next",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
   "cleanUrls": true,
   "headers": [
@@ -51,8 +51,11 @@
   "github": {
     "silent": true
   },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/backend/api/$1" }
+  ],
   "functions": {
-    "frontend/app/api/responses/**/*.ts": {
+    "backend/api/**/*.ts": {
       "memory": 1024,
       "maxDuration": 60
     }
