@@ -31,26 +31,25 @@ const initBackend = () => {
 };
 
 // Function to check for the existence of Serverless Functions
+const checkServerlessFunctions = async (): Promise<boolean> => {
   try {
     const functionsPath = path.join(__dirname, 'api');
-    const functionFiles = fs.readdirSync(functionsPath).filter(file => file.endsWith('.ts'));
-    return functionFiles.length > 0;
-  } catch (error) {
-    console.error('Error checking serverless functions:', error);
-    return false;
-  }
-    const findFunctionFiles = (dir: string): string[] => {
-      const entries = fs.readdirSync(dir, { withFileTypes: true });
+    const findFunctionFiles = async (dir: string): Promise<string[]> => {
+      const entries = await fs.promises.readdir(dir, { withFileTypes: true });
       
-      return entries.flatMap(entry => {
+      const files = await Promise.all(entries.map(async entry => {
         const fullPath = path.join(dir, entry.name);
-        return entry.isDirectory() 
-          ? findFunctionFiles(fullPath)
-          : (entry.name.endsWith('.ts') ? [fullPath] : []);
-      });
+        if (entry.isDirectory()) {
+          return findFunctionFiles(fullPath);
+        } else {
+          return entry.name.match(/route\.(ts|js|tsx|jsx)$/) ? [fullPath] : [];
+        }
+      }));
+      
+      return files.flat();
     };
     
-    const functionFiles = findFunctionFiles(functionsPath);
+    const functionFiles = await findFunctionFiles(functionsPath);
     return functionFiles.length > 0;
   } catch (error) {
     console.error('Error checking serverless functions:', error);
