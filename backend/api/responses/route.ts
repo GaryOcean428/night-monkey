@@ -1,6 +1,7 @@
 import { createResponse, createStreamingResponse, defaultModel } from "@/backend/openai";
 import modelRouter, { TaskType, Provider } from "@/backend/model-router";
 import providers, { isModelAvailable } from "@/backend/providers";
+import { checkServerlessFunctions } from "@/backend/main";
 
 export const runtime = "nodejs";
 
@@ -14,6 +15,11 @@ export const runtime = "nodejs";
  */
 export async function POST(request: Request) {
   try {
+    const serverlessFunctionsExist = checkServerlessFunctions();
+    if (!serverlessFunctionsExist) {
+      return Response.json({ error: "No Serverless Functions found" }, { status: 404 });
+    }
+
     const { 
       input, 
       model = defaultModel, 

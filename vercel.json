@@ -52,7 +52,7 @@
     "silent": true
   },
   "functions": {
-    "backend/api/**/*.ts": {
+    "backend/api/**/route.{ts,js,tsx,jsx}": {
       "memory": 1024,
       "maxDuration": 60
     }

@@ -1,9 +1,15 @@
 import { openai } from "@/backend/openai";
+import { checkServerlessFunctions } from "@/backend/main";
 
 export const runtime = "nodejs";
 
 // Create a new assistant
 export async function POST() {
+  const serverlessFunctionsExist = checkServerlessFunctions();
+  if (!serverlessFunctionsExist) {
+    return Response.json({ error: "No Serverless Functions found" }, { status: 404 });
+  }
+
   const assistant = await openai.beta.assistants.create({
     instructions: "You are a helpful assistant.",
     name: "Quickstart Assistant",

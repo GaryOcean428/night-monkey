@@ -1,4 +1,5 @@
 import { openai, createResponse } from "@/backend/openai";
+import { checkServerlessFunctions } from "@/backend/main";
 
 export const runtime = "nodejs";
 
@@ -10,6 +11,11 @@ export const runtime = "nodejs";
  */
 export async function POST() {
   try {
+    const serverlessFunctionsExist = checkServerlessFunctions();
+    if (!serverlessFunctionsExist) {
+      return Response.json({ error: "No Serverless Functions found" }, { status: 404 });
+    }
+
     // Create an initial empty response to establish a conversation
     // Using store: true ensures the response is persisted server-side
     const response = await createResponse("", {
