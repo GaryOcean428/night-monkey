@@ -7,6 +7,18 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/versions
+.yarn/patches
+.yarn/releases
+.yarn/sdks
+.yarn/metadata.json
+.yarn/global
+# yarn
+# yarn-error.log
+# yarn-debug.log
 
 # testing
 /coverage
