@@ -51,8 +51,11 @@
   "github": {
     "silent": true
   },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/backend/api/$1" }
+  ],
   "functions": {
-    "backend/api/**/route.ts": {
+    "api/**/*.ts": {
       "memory": 1024,
       "maxDuration": 60
     }
