@@ -10,7 +10,7 @@
     "typecheck": "yarn tsc --noEmit"
   },
   "dependencies": {
-    "next": "14.1.4",
+    "next": "14.2.21",
     "openai": "^4.46.0",
     "react": "^18",
     "react-dom": "^18",
