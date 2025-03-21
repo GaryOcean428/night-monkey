@@ -34,7 +34,20 @@ const initBackend = () => {
 const checkServerlessFunctions = () => {
   try {
     const functionsPath = path.join(__dirname, 'api');
-    const functionFiles = fs.readdirSync(functionsPath).filter(file => file.endsWith('.ts'));
+    
+    // Helper function to recursively search directories
+    const findFunctionFiles = (dir: string): string[] => {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      
+      return entries.flatMap(entry => {
+        const fullPath = path.join(dir, entry.name);
+        return entry.isDirectory() 
+          ? findFunctionFiles(fullPath)
+          : (entry.name.endsWith('.ts') ? [fullPath] : []);
+      });
+    };
+    
+    const functionFiles = findFunctionFiles(functionsPath);
     return functionFiles.length > 0;
   } catch (error) {
     console.error('Error checking serverless functions:', error);
