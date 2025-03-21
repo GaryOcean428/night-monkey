@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 
 // Create a new assistant
 export async function POST() {
-  const serverlessFunctionsExist = checkServerlessFunctions();
+  const serverlessFunctionsExist = await checkServerlessFunctions();
   if (!serverlessFunctionsExist) {
     return Response.json({ error: "No Serverless Functions found" }, { status: 404 });
   }
