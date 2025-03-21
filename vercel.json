@@ -52,7 +52,7 @@
     "silent": true
   },
   "functions": {
-    "frontend/app/api/responses/**/*.ts": {
+    "frontend/api/**/*.ts": {
       "memory": 1024,
       "maxDuration": 60
     }
