@@ -11,7 +11,7 @@ export const runtime = "nodejs";
  */
 export async function POST() {
   try {
-    const serverlessFunctionsExist = checkServerlessFunctions();
+    const serverlessFunctionsExist = await checkServerlessFunctions();
     if (!serverlessFunctionsExist) {
       return Response.json({ error: "No Serverless Functions found" }, { status: 404 });
     }

@@ -1,5 +1,6 @@
 import { createStreamingResponse } from "@/backend/openai";
 import { handleToolCalls } from "@/backend/tools-config";
+import { checkServerlessFunctions } from "@/backend/main";
 
 export const runtime = "nodejs";
 
@@ -10,6 +11,11 @@ export const runtime = "nodejs";
  */
 export async function POST(request: Request) {
   try {
+    const serverlessFunctionsExist = await checkServerlessFunctions();
+    if (!serverlessFunctionsExist) {
+      return Response.json({ error: "No Serverless Functions found" }, { status: 404 });
+    }
+
     const { 
       responseId,
       toolCalls,
