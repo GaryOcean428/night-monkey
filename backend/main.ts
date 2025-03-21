@@ -31,14 +31,9 @@ const initBackend = () => {
 };
 
 // Function to check for the existence of Serverless Functions
+const checkServerlessFunctions = (): boolean => {
   try {
     const functionsPath = path.join(__dirname, 'api');
-    const functionFiles = fs.readdirSync(functionsPath).filter(file => file.endsWith('.ts'));
-    return functionFiles.length > 0;
-  } catch (error) {
-    console.error('Error checking serverless functions:', error);
-    return false;
-  }
     const findFunctionFiles = (dir: string): string[] => {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
       
