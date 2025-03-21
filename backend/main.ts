@@ -35,8 +35,7 @@ const checkServerlessFunctions = async (): Promise<boolean> => {
   try {
     const functionsPath = path.join(__dirname, 'api');
     const findFunctionFiles = async (dir: string): Promise<string[]> => {
-      const entries = await fs.promises.readdir(dir, { withFileTypes: true });
-      
+      const entries = await fs.promises.readdir(dir, { withFileTypes: true }
       const files = await Promise.all(entries.map(async entry => {
         const fullPath = path.join(dir, entry.name);
         if (entry.isDirectory()) {
