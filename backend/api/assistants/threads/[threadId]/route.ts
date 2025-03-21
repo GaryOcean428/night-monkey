@@ -18,7 +18,7 @@ export async function GET(request: Request) {
       }, { status: 400 });
     }
 
-    const response = await openai.responses.retrieve(threadId);
+    const response = await openai.beta.threads.retrieve(threadId);
 
     return Response.json({ 
       threadId: response.id,
@@ -44,7 +44,16 @@ export async function POST(request: Request) {
   try {
     const url = new URL(request.url);
     const threadId = url.pathname.split("/").pop();
-    const { input, model = "gpt-4o" } = await request.json();
+    let input, model = "gpt-4o";
+    try {
+      const body = await request.json();
+      input = body.input;
+      model = body.model || "gpt-4o";
+    } catch (error) {
+      return Response.json({ 
+        error: "Invalid JSON in request body" 
+      }, { status: 400 });
+    }
 
     if (!threadId) {
       return Response.json({ 

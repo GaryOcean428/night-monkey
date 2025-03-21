@@ -7,10 +7,12 @@ export const runtime = "nodejs";
  * 
  * Retrieve the details of a specific file
  */
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: { fileId: string } }
+) {
   try {
-    const url = new URL(request.url);
-    const fileId = url.pathname.split("/").pop();
+    const fileId = params.fileId;
 
     if (!fileId) {
       return Response.json({ 
@@ -41,10 +43,12 @@ export async function GET(request: Request) {
  * 
  * Update the details of a specific file
  */
-export async function POST(request: Request) {
+export async function POST(
+  request: Request,
+  { params }: { params: { fileId: string } }
+) {
   try {
-    const url = new URL(request.url);
-    const fileId = url.pathname.split("/").pop();
+    const fileId = params.fileId;
     const { name, type } = await request.json();
 
     if (!fileId) {
@@ -59,7 +63,10 @@ export async function POST(request: Request) {
       }, { status: 400 });
     }
 
-    const response = await openai.files.update(fileId, { name, type });
+    // Files can't be updated via OpenAI API
+    // Consider implementing a custom solution using your own database
+    const response = await openai.files.retrieve(fileId);
+    // Store updated metadata in your own database
 
     return Response.json({ 
       fileId: response.id,
