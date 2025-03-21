@@ -12,11 +12,5 @@
 *.md
 !README.md
 
-# Ignore test files
-*.test.ts
-*.test.tsx
-/test
-/tests
-
 # Ignore source maps in production
 *.map
