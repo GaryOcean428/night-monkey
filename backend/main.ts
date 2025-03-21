@@ -31,7 +31,7 @@ const initBackend = () => {
 };
 
 // Function to check for the existence of Serverless Functions
-const checkServerlessFunctions = async (): Promise<boolean> => {
+export const checkServerlessFunctions = async (): Promise<boolean> => {
   try {
     const functionsPath = path.join(__dirname, 'api');
     const findFunctionFiles = async (dir: string): Promise<string[]> => {
