@@ -55,7 +55,7 @@
     { "src": "/api/(.*)", "dest": "/backend/api/$1" }
   ],
   "functions": {
-    "api/**/*.ts": {
+    "backend/api/**/*.ts": {
       "memory": 1024,
       "maxDuration": 60
     }

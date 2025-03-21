@@ -1,0 +1,63 @@
+import { openai } from "@/backend/openai";
+
+export const runtime = "nodejs";
+
+// Create a new file
+export async function POST(request: Request) {
+  try {
+    const { fileName, fileContent } = await request.json();
+    const file = await openai.files.create({
+      name: fileName,
+      content: fileContent,
+    });
+    return Response.json({ fileId: file.id });
+  } catch (error) {
+    console.error("Error creating file:", error);
+    return Response.json({ 
+      error: error.message || "Failed to create file",
+      timestamp: new Date().toISOString()
+    }, { status: 500 });
+  }
+}
+
+// Get file details
+export async function GET(request: Request) {
+  try {
+    const url = new URL(request.url);
+    const fileId = url.searchParams.get("fileId");
+    if (!fileId) {
+      return Response.json({ 
+        error: "Missing fileId parameter" 
+      }, { status: 400 });
+    }
+    const file = await openai.files.retrieve(fileId);
+    return Response.json({ file });
+  } catch (error) {
+    console.error("Error retrieving file:", error);
+    return Response.json({ 
+      error: error.message || "Failed to retrieve file",
+      timestamp: new Date().toISOString()
+    }, { status: 500 });
+  }
+}
+
+// Delete a file
+export async function DELETE(request: Request) {
+  try {
+    const url = new URL(request.url);
+    const fileId = url.searchParams.get("fileId");
+    if (!fileId) {
+      return Response.json({ 
+        error: "Missing fileId parameter" 
+      }, { status: 400 });
+    }
+    await openai.files.delete(fileId);
+    return Response.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting file:", error);
+    return Response.json({ 
+      error: error.message || "Failed to delete file",
+      timestamp: new Date().toISOString()
+    }, { status: 500 });
+  }
+}
